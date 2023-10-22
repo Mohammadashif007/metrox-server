@@ -50,6 +50,20 @@ async function run() {
         res.send(result);
     })
 
+    app.get('/cars/:brandName', async (req, res) => {
+        const brandName = req.params.brandName;
+        const query = {brandName: brandName};
+        const cursor = await carCollection.find(query).toArray();
+        res.send(cursor);
+    })
+
+    app.get('/car/:id', async (req, res) => {
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)};
+        const car = await carCollection.findOne(query);
+        res.send(car);
+    })
+
 
 
 
